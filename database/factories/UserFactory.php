@@ -25,5 +25,6 @@ $factory->define(User::class, function (Faker $faker) {
         'email_verified_at' => $faker->dateTimeBetween('-3 years', 'now'),
         'password' => Hash::make($faker->password), // password
         'remember_token' => Str::random(10),
+        'api_token' => Str::random(60)
     ];
 });

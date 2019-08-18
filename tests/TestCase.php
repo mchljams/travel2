@@ -13,7 +13,18 @@ abstract class TestCase extends BaseTestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        Artisan::call('config:cache');
+        Artisan::call('config:clear');
+
+        Artisan::call('migrate');
         Artisan::call('db:seed');
 
+    }
+
+    public function tearDown(): void
+    {
+        parent::tearDown();
+        Artisan::call('migrate:reset');
     }
 }
