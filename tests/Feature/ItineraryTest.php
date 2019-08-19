@@ -5,11 +5,16 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Faker\Generator as Faker;
+use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Itinerary;
 
 class ItineraryTest extends TestCase
 {
+    use WithFaker;
+    use RefreshDatabase;
+
     private $user;
 
     protected function setUp(): void
@@ -72,22 +77,58 @@ class ItineraryTest extends TestCase
 
     }
 
+
     /**
-     * A feature test to get a single itinerary without a bearer token
+     * A feature test to attempt to get a itinerary that does not exist
      *
      * @return void
      */
-    public function testGetSingleItinerariesWithoutBearerToken()
+    public function testGetSingleItineraryThatDoesNotExist()
     {
-        $itinerary = Itinerary::all()->random(1)->first();
+        $itinerary = $this->getItineraryThatDoesNotExist();
+
 
         $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $this->user->api_token,
             'Accept' => 'application/json'
 
-        ])->get('/api/itineraries/' . $itinerary->id);
+        ])->get('/api/itineraries/' . $itinerary);
 
-        $response->assertStatus(401);
+
+        $response->assertJson([]);
 
     }
 
+    /**
+     * A helper function to generate a itinerary id that does not exist
+     *
+     * @return int
+     */
+    function getItineraryThatDoesNotExist()
+    {
+
+        $itinerary = DB::table('itineraries')->orderBy('id', 'desc')->first();
+
+        return $itinerary->id + 1;
+
+    }
+
+//    function testCreateNewItinerary()
+//    {
+//
+//        $data = [
+//            'name' => $this->faker->word(),
+//            'user_id' => $this->user->id,
+//        ];
+//
+//        $headers = [
+//            'Authorization' => 'Bearer ' . $this->user->api_token,
+//            'Accept' => 'application/json'
+//        ];
+//
+//
+//
+//        $response = $this->withHeaders($headers)->post('/api/itineraries/', $data);
+//
+//    }
 }
