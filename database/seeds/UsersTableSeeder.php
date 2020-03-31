@@ -17,12 +17,12 @@ class UsersTableSeeder extends Seeder
         // Let's truncate our existing records to start from scratch.
         User::truncate();
 
-        $user = new User();
-        $user->name = "Michael";
-        $user->email = "mike.pisula@gmail.com";
-        $user->password = Hash::make('password');
-        $user->api_token = "5abdn5mtevQMbik60RRYsa083kGEOEX4mU6eOZ2JPp5y2Jgwvtvr5UUbE7Og";
-        $user->save();
+//        $user = new User();
+//        $user->name = "Michael";
+//        $user->email = "mike.pisula@gmail.com";
+//        $user->password = Hash::make('password');
+//        $user->api_token = "5abdn5mtevQMbik60RRYsa083kGEOEX4mU6eOZ2JPp5y2Jgwvtvr5UUbE7Og";
+//        $user->save();
 
 //        $faker = \Faker\Factory::create();
 

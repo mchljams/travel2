@@ -3,63 +3,74 @@
 namespace App\Http\Controllers\API;
 
 use App\Itinerary;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\API\BaseController;
+use App\Http\Requests\StoreItineraryRequest;
 
-
-class ItineraryController extends Controller
+class ItineraryController extends BaseController
 {
-    private $user;
-
-    public function __construct()
-    {
-        $this->user =  Auth::guard('api')->user();
-    }
-
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        $itinerary = Itinerary::all();
+        //dd($this->isAdmin);
+        if ($this->isAdmin == true) {
+            // load the itinerary to be updated
+            $itineraries = Itinerary::all();
 
-        return response()->json($itinerary, 200);
+
+        } else {
+            // load the itinerary to be updated
+            $itineraries = Itinerary::where('user_id', $this->user->id)
+                ->where('user_id', $this->user->id)
+                ->get();
+        }
+
+
+        return $this->setResponse(200, $itineraries)->respond();
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(StoreItineraryRequest $request)
     {
+        $validated = $request->validated();
 
-        $validated = $this->validateRequest($request);
-
-        $itinerary = Itinerary::create($validated);
+        if($this->isAdmin == true) {
+            $itinerary = Itinerary::create($validated);
+        } else {
+            $itinerary = new Itinerary();
+            $itinerary->name = $validated['name'];
+            $itinerary->user_id = $this->user->id;
+            $itinerary->save();
+        }
 
         $this->log('Itinerary Created');
 
-        return response()->json($itinerary, 201);
-
+        return $this->setResponse(201, $itinerary)->respond();
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
-        $itinerary = Itinerary::find($id);
+        $itinerary = $this->findItinerary($id);
 
-        return response()->json($itinerary, 200);
+        if($itinerary) {
+            $this->setResponse(200, $itinerary);
+        }
+
+        return $this->respond();
     }
 
     /**
@@ -67,52 +78,101 @@ class ItineraryController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(StoreItineraryRequest $request, $id)
     {
-        $itinerary = Itinerary::findOrFail($id);
+        // get the validated request values if errors,
+        // returns a "422 Unprocessable Entity" Response
+        // with detailed error messages
+        $validated = $request->validated();
 
-        $validated = $this->validateRequest($request);
+        // load the itinerary object
+        $itinerary = $this->findItinerary($id);
 
-        $itinerary->update($validated);
+        // try/catch for updating the itinerary
+        try {
+            // update the itinerary with the validated request values
+            $itinerary->update($validated);
+            // check if the itinerary was not changed
+            if(!$itinerary->wasChanged()) {
+                // when the itinerary was not changed...
+                // ...set the message
+                $message = 'Itinerary Update Received, But No Changes Made';
+                // ...log the message
+                $this->log($message);
+                // ...and return a success http status code and message
+                $this->setResponse(200, null, $message);
+            }
+            // when the itinerary was changed..
+            // ...set the message
+            $message = 'Itinerary Updated';
+            // ...log the message
+            $this->log($message);
+            // ...and return a success http status code and message
+            $this->setResponse(202, null, $message);
 
-        $this->log('Itinerary Updated');
+        } catch (\Exception $e) {
+            // when there was a problem updating the itinerary return
+            // a response with a bad request message and http code
+            $this->setResponse(400);
+        }
 
-        return response()->json($itinerary, 200);
-
+        return $this->respond();
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
-        $itinerary = Itinerary::findOrFail($id);
+        $itinerary = $this->findItinerary($id);
 
-        $itinerary->delete();
+        try {
+            $itinerary->delete();
+        } catch (\Exception $e) {
+
+            $this->log('There was a problem deleting an itinerary');
+            return $this->setResponse(400)->respond();
+        }
 
         $this->log('Itinerary Deleted');
-
-        return response()->json(null, 204);
+        return $this->setResponse(204)->respond();
     }
 
-    public function validateRequest(Request $request) {
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \App\Itinerary
+     */
+    private function findItinerary($id) {
 
-        return $request->validate([
-            'name' => 'required|regex:/^[a-zA-z0-9 ]+$/',
-            'user_id' => 'sometimes|required|integer|exists:users,id'
-        ]);
-    }
 
+        try {
 
-    protected function log($action) {
-        Log::info('', array(
-            'action' => $action,
-            'user' => $this->user->id
-        ));
+            if($this->isAdmin == true) {
+                // load the itinerary to be updated
+                $itinerary = Itinerary::findOrFail($id);
+            } else {
+                // load the itinerary to be updated
+                $itinerary = Itinerary::where('id', $id)
+                    ->where('user_id', $this->user->id)
+                    ->firstOrFail();
+            }
+
+            return $itinerary;
+
+        } catch (\Exception $e) {
+            // if the itinerary was not found, then return a not found response
+            $this->setResponse(404, null, 'Itinerary Not Found');
+
+            $this->log('There was a problem loading an itinerary');
+
+            return null;
+        }
     }
 }

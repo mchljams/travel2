@@ -4,6 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ *
+ * @property string $name
+ * @property string $user_id
+ */
+
 class Itinerary extends Model
 {
     protected $table = 'itineraries';
@@ -23,7 +29,7 @@ class Itinerary extends Model
      * @var array
      */
     protected $hidden = [
-        'user_id'
+        //'user_id'
     ];
 
 }
