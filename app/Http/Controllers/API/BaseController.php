@@ -33,7 +33,7 @@ class BaseController extends Controller
     }
 
 
-    protected function setResponse($statusCode, Collection $data = null, $statusMessage = null)
+    protected function setResponse($statusCode, $data = null, $statusMessage = null)
     {
         $statusMessage = ($statusMessage == null) ? Response::$statusTexts[$statusCode] : $statusMessage;
 

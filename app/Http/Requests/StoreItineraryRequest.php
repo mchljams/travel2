@@ -23,10 +23,18 @@ class StoreItineraryRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+
+        $rules = [
             'name' => 'required|regex:/^[a-zA-z0-9 ]+$/',
-            'user_id' => 'sometimes|required|integer|exists:users,id'
         ];
+
+        if($this->user()->getApiGuard() == 'admin') {
+            $rules['user_id'] = 'required|integer|exists:users,id';
+        } else {
+            $rules['user_id'] = 'integer';
+        }
+
+        return $rules;
     }
 
     /**

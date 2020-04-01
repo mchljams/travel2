@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class AdminUser extends Authenticatable
 {
     use Notifiable;
+    use UserGuardTrait;
 
     protected $table = 'admin_users';
 
