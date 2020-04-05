@@ -79,12 +79,12 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => Mchljams\TravelLog\Models\User::class,
         ],
 
         'admin_users' => [
             'driver' => 'eloquent',
-            'model' => App\AdminUser::class,
+            'model' => Mchljams\TravelLog\Models\AdminUser::class,
         ],
 
         // 'users' => [

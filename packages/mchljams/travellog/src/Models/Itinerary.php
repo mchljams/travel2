@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Mchljams\TravelLog\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

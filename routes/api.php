@@ -13,31 +13,31 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::prefix('v1')->group(function () {
-
-    Route::middleware(['auth:admin_api'])->group(function () {
-        Route::prefix('admin')->group(function () {
-            Route::name('admin.')->group(function () {
-                ////////////////////////////////////////////////////////////
-                /// PLACE ADMIN API ROUTES HERE ////////////////////////////
-                ////////////////////////////////////////////////////////////
-                Route::apiResource('itineraries', 'API\ItineraryController');
-                ////////////////////////////////////////////////////////////
-            });
-        });
-    });
-
-    Route::middleware(['auth:api'])->group(function () {
-        ////////////////////////////////////////////////////////////
-        /// PLACE PUBLIC API ROUTES HERE ///////////////////////////
-        ////////////////////////////////////////////////////////////
-        Route::get('/user', function (Request $request) {
-            return $request->user();
-        })->name('user.show');
-        Route::apiResource('itineraries', 'API\ItineraryController');
-        ////////////////////////////////////////////////////////////
-    });
-});
+//Route::prefix('v1')->group(function () {
+//
+//    Route::middleware(['auth:admin_api'])->group(function () {
+//        Route::prefix('admin')->group(function () {
+//            Route::name('admin.')->group(function () {
+//                ////////////////////////////////////////////////////////////
+//                /// PLACE ADMIN API ROUTES HERE ////////////////////////////
+//                ////////////////////////////////////////////////////////////
+//                Route::apiResource('itineraries', 'API\ItineraryController');
+//                ////////////////////////////////////////////////////////////
+//            });
+//        });
+//    });
+//
+//    Route::middleware(['auth:api'])->group(function () {
+//        ////////////////////////////////////////////////////////////
+//        /// PLACE PUBLIC API ROUTES HERE ///////////////////////////
+//        ////////////////////////////////////////////////////////////
+//        Route::get('/user', function (Request $request) {
+//            return $request->user();
+//        })->name('user.show');
+//        Route::apiResource('itineraries', 'API\ItineraryController');
+//        ////////////////////////////////////////////////////////////
+//    });
+//});
 
 
 

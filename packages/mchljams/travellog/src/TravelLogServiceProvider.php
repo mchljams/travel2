@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Providers;
+namespace Mchljams\TravelLog;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Debug\ExceptionHandler;
-use App\Exceptions\ApiHandler;
+use Mchljams\TravelLog\Exceptions\ApiHandler;
 
-class ApiServiceProvider extends ServiceProvider
+class TravelLogServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -32,5 +32,6 @@ class ApiServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        include __DIR__.'/Routes/api.php';
     }
 }

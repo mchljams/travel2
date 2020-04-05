@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace Mchljams\TravelLog\Http\Controllers\API;
 
-use App\Itinerary;
-use App\Http\Controllers\API\BaseController;
-use App\Http\Requests\StoreItineraryRequest;
+use Mchljams\TravelLog\Models\Itinerary;
+use Mchljams\TravelLog\Http\Controllers\API\BaseController;
+use Mchljams\TravelLog\Http\Requests\StoreItineraryRequest;
 
 class ItineraryController extends BaseController
 {
@@ -92,26 +92,27 @@ class ItineraryController extends BaseController
 
         // try/catch for updating the itinerary
         try {
-            // update the itinerary with the validated request values
-            $itinerary->update($validated);
-            // check if the itinerary was not changed
-            if(!$itinerary->wasChanged()) {
-                // when the itinerary was not changed...
+            if(!is_null($itinerary)) {
+                // update the itinerary with the validated request values
+                $itinerary->update($validated);
+                // check if the itinerary was not changed
+                if (!$itinerary->wasChanged()) {
+                    // when the itinerary was not changed...
+                    // ...set the message
+                    $message = 'Itinerary Update Received, But No Changes Made';
+                    // ...log the message
+                    $this->log($message);
+                    // ...and return a success http status code and message
+                    $this->setResponse(200, null, $message);
+                }
+                // when the itinerary was changed..
                 // ...set the message
-                $message = 'Itinerary Update Received, But No Changes Made';
+                $message = 'Itinerary Updated';
                 // ...log the message
                 $this->log($message);
                 // ...and return a success http status code and message
-                $this->setResponse(200, null, $message);
+                $this->setResponse(202, null, $message);
             }
-            // when the itinerary was changed..
-            // ...set the message
-            $message = 'Itinerary Updated';
-            // ...log the message
-            $this->log($message);
-            // ...and return a success http status code and message
-            $this->setResponse(202, null, $message);
-
         } catch (\Exception $e) {
             // when there was a problem updating the itinerary return
             // a response with a bad request message and http code
@@ -158,15 +159,18 @@ class ItineraryController extends BaseController
                 // load the itinerary to be updated
                 $itinerary = Itinerary::findOrFail($id);
             } else {
+
                 // load the itinerary to be updated
                 $itinerary = Itinerary::where('id', $id)
                     ->where('user_id', $this->user->id)
                     ->firstOrFail();
             }
 
+
             return $itinerary;
 
         } catch (\Exception $e) {
+
             // if the itinerary was not found, then return a not found response
             $this->setResponse(404, null, 'Itinerary Not Found');
 

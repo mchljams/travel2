@@ -1,10 +1,11 @@
 <?php
 
-namespace App;
+namespace Mchljams\TravelLog\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Mchljams\TravelLog\Models\Traits\UserGuardTrait;
 
 class AdminUser extends Authenticatable
 {

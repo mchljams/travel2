@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Mchljams\TravelLog\Models\Traits;
 
 use Illuminate\Support\Facades\Auth;
 
