@@ -45,3 +45,19 @@
         'model' => Mchljams\TravelLog\Models\AdminUser::class,
     ],
     ```
+    
+## Database 
+
+
+### Migration
+
+The migrations can be run with the standard artisan command:
+``` 
+php artisan migrate
+``` 
+
+### Seeding 
+If you want to seed the database for testing:
+```
+php artisan db:seed --class=Mchljams\\TravelLog\\Database\\Seeds\\TravelLogDatabaseSeeder
+```
