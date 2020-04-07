@@ -14,9 +14,21 @@ class CreateItinerariesTable extends Migration
     public function up()
     {
         Schema::create('itineraries', function (Blueprint $table) {
+
+            $driver = Schema::connection($this->getConnection())->getConnection()->getDriverName();
+
             $table->bigIncrements('id');
             $table->string('name');
+            if ('sqlite' === $driver) {
+                $table->unsignedBigInteger('user_id')->default('');
+            } else {
+                $table->unsignedBigInteger('user_id');
+            }
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade');
         });
     }
 

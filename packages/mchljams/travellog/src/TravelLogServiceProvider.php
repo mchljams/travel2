@@ -15,9 +15,7 @@ class TravelLogServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        /**
-         * Do not forget to import them before using!
-         */
+        // Bind the custom API Exception Handler
         $this->app->bind(
             ExceptionHandler::class,
             ApiHandler::class
@@ -31,7 +29,11 @@ class TravelLogServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-        include __DIR__.'/Routes/api.php';
+        // Load the package API Routes
+        $this->loadRoutesFrom(__DIR__.'/Routes/api.php');
+        // Load the package migrations
+        $this->loadMigrationsFrom(__DIR__.'/Database/Migrations');
+        // Load the package factories
+        $this->app->make('Illuminate\Database\Eloquent\Factory')->load(__DIR__ . '/Database/Factories');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mchljams\Database\Seeds;
+namespace Mchljams\TravelLog\Database\Seeds;
 
 use Illuminate\Database\Seeder;
 use Mchljams\TravelLog\Models\Itinerary;

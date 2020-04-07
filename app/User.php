@@ -2,15 +2,13 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\UserGuardTrait;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     use Notifiable;
-    use UserGuardTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -19,10 +17,6 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'password',
-    ];
-
-    protected $with = [
-        'itineraries'
     ];
 
     /**
@@ -42,12 +36,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    /**
-     * Get the comments for the blog post.
-     */
-    public function itineraries()
-    {
-        return $this->hasMany('App\Itinerary')->select('id', 'user_id', 'name');
-    }
 }

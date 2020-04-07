@@ -1,11 +1,11 @@
 <?php
 
-namespace Mchljams\Database\Seeds;
+namespace Mchljams\TravelLog\Database\Seeds;
 
 use Illuminate\Database\Seeder;
-use Mchljams\Database\Seeds\AdminUsersTableSeeder;
-use Mchljams\Database\Seeds\UsersTableSeeder;
-use Mchljams\Database\Seeds\ItinerariesTableSeeder;
+use Mchljams\TravelLog\Database\Seeds\AdminUsersTableSeeder;
+use Mchljams\TravelLog\Database\Seeds\UsersTableSeeder;
+use Mchljams\TravelLog\Database\Seeds\ItinerariesTableSeeder;
 
 class TravelLogDatabaseSeeder extends Seeder
 {
