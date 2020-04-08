@@ -3,6 +3,8 @@
 namespace Mchljams\TravelLog\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class StoreItineraryRequest extends FormRequest
 {
@@ -23,13 +25,27 @@ class StoreItineraryRequest extends FormRequest
      */
     public function rules()
     {
+        $input = $this->input();
 
-        $rules = [
-            'name' => 'required|regex:/^[a-zA-z0-9 ]+$/',
+        // check if admin
+        $admin = ($this->user()->getApiGuard() == 'admin') ? true : false;
+        $name = $input['name'];
+        // set the user id for the itinerary that will be created/updated
+        $user_id = $admin ? $input['user_id'] : Auth::guard('api')->user()->id;
+        // initialize the rules array
+        $rules = [];
+        // add the name rules to the array
+        $rules['name'] = [
+            'required',
+            'regex:/^[a-zA-z0-9 ]+$/',
+            Rule::unique('itineraries')->where(function ($query) use ($user_id, $name) {
+                return $query->where('user_id', $user_id);
+            })
         ];
 
-        if($this->user()->getApiGuard() == 'admin') {
+        if($admin) {
             $rules['user_id'] = 'required|integer|exists:users,id';
+
         } else {
             $rules['user_id'] = 'integer';
         }
