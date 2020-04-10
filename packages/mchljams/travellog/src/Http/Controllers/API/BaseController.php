@@ -54,8 +54,8 @@ class BaseController extends Controller
     }
 
 
-    protected function log($action) {
-        Log::info('', array(
+    protected function log($action, $level = 'info') {
+        Log::{$level}('', array(
             'action' => $action,
             'user' => $this->user->id
         ));

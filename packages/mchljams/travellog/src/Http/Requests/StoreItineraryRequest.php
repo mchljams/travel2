@@ -40,7 +40,7 @@ class StoreItineraryRequest extends FormRequest
             'regex:/^[a-zA-z0-9 ]+$/',
             Rule::unique('itineraries')->where(function ($query) use ($user_id, $name) {
                 return $query->where('user_id', $user_id);
-            })
+            })->ignore($name, 'name')
         ];
 
         if($admin) {

@@ -7,11 +7,13 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Mchljams\TravelLog\Models\Traits\UserGuardTrait;
 use Mchljams\TravelLog\Models\Itinerary;
+use Spatie\Activitylog\Traits\CausesActivity;
 
 class User extends Authenticatable
 {
     use Notifiable;
     use UserGuardTrait;
+    use CausesActivity;
 
     /**
      * The attributes that are mass assignable.

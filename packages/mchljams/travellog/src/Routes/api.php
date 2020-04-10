@@ -20,7 +20,9 @@ Route::prefix('api/v1')->group(function () {
                 ////////////////////////////////////////////////////////////
                 /// PLACE ADMIN API ROUTES HERE ////////////////////////////
                 ////////////////////////////////////////////////////////////
+                Route::get('itineraries/log/{id}', 'Mchljams\TravelLog\Http\Controllers\API\ItineraryController@logs');
                 Route::apiResource('itineraries', 'Mchljams\TravelLog\Http\Controllers\API\ItineraryController');
+
                 ////////////////////////////////////////////////////////////
             });
         });

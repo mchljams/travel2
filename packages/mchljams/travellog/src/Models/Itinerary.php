@@ -3,6 +3,8 @@
 namespace Mchljams\TravelLog\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  *
@@ -12,10 +14,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Itinerary extends Model
 {
+    use SoftDeletes;
+    use LogsActivity;
+
     protected $table = 'itineraries';
 
+
 //    protected $with = [
-//        'waypoints'
+//        'activities'
 //    ];
 
     protected $fillable = [
@@ -32,4 +38,10 @@ class Itinerary extends Model
         //'user_id'
     ];
 
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->enableLoggingModelsEvents = false;
+    }
 }

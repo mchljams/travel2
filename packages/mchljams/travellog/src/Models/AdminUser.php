@@ -6,11 +6,13 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Mchljams\TravelLog\Models\Traits\UserGuardTrait;
+use Spatie\Activitylog\Traits\CausesActivity;
 
 class AdminUser extends Authenticatable
 {
     use Notifiable;
     use UserGuardTrait;
+    use CausesActivity;
 
     protected $table = 'admin_users';
 

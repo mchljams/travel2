@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "25530cd7f0dde8851923939b46aa8922",
+    "content-hash": "5f0fe46cb75336e0f36080f7378901e6",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -336,16 +336,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v6.18.5",
+            "version": "v6.18.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "5b7f541a3c075b394793f4d7884a24ad6f00288a"
+                "reference": "4ef5f9612c2694c915f53f0cec3e4081e9bfc778"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/5b7f541a3c075b394793f4d7884a24ad6f00288a",
-                "reference": "5b7f541a3c075b394793f4d7884a24ad6f00288a",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/4ef5f9612c2694c915f53f0cec3e4081e9bfc778",
+                "reference": "4ef5f9612c2694c915f53f0cec3e4081e9bfc778",
                 "shasum": ""
             },
             "require": {
@@ -478,7 +478,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2020-04-07T18:54:55+00:00"
+            "time": "2020-04-08T15:51:23+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -707,12 +707,13 @@
             "version": "dev-master",
             "dist": {
                 "type": "path",
-                "url": "./packages/mchljams/travellog",
-                "reference": "c57fdb8d5cb3fada1abaf14e5c58fc52b4bd118a"
+                "url": "packages/mchljams/travellog",
+                "reference": "4660f40e53c71d1ff6f2ea5e7cd8be164a540cc3"
             },
             "require": {
                 "laravel/framework": "^6.2",
-                "php": "^7.2"
+                "php": "^7.2",
+                "spatie/laravel-activitylog": "^3.14"
             },
             "require-dev": {
                 "fzaninotto/faker": "^1.9.1",
@@ -739,7 +740,10 @@
                     "name": "Michael James"
                 }
             ],
-            "description": "Travel Log API Package"
+            "description": "Travel Log API Package",
+            "transport-options": {
+                "symlink": true
+            }
         },
         {
             "name": "monolog/monolog",
@@ -1408,6 +1412,82 @@
                 "uuid"
             ],
             "time": "2020-02-21T04:36:14+00:00"
+        },
+        {
+            "name": "spatie/laravel-activitylog",
+            "version": "3.14.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-activitylog.git",
+                "reference": "08a128edbfc96493f45d785381ab0be4479cd763"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-activitylog/zipball/08a128edbfc96493f45d785381ab0be4479cd763",
+                "reference": "08a128edbfc96493f45d785381ab0be4479cd763",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "^6.0|^7.0",
+                "illuminate/database": "^6.0|^7.0",
+                "illuminate/support": "^6.0|^7.0",
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "ext-json": "*",
+                "orchestra/testbench": "^4.0|^5.0",
+                "phpunit/phpunit": "^8.0|^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Activitylog\\ActivitylogServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Activitylog\\": "src"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Sebastian De Deyne",
+                    "email": "sebastian@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Tom Witkowski",
+                    "email": "dev.gummibeer@gmail.com",
+                    "homepage": "https://gummibeer.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A very simple activity logger to monitor the users of your website or application",
+            "homepage": "https://github.com/spatie/activitylog",
+            "keywords": [
+                "activity",
+                "laravel",
+                "log",
+                "spatie",
+                "user"
+            ],
+            "time": "2020-03-23T17:09:07+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

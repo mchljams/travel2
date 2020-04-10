@@ -5,6 +5,7 @@ namespace Mchljams\TravelLog\Http\Controllers\API;
 use Mchljams\TravelLog\Models\Itinerary;
 use Mchljams\TravelLog\Http\Controllers\API\BaseController;
 use Mchljams\TravelLog\Http\Requests\StoreItineraryRequest;
+use Spatie\Activitylog\Models\Activity;
 
 class ItineraryController extends BaseController
 {
@@ -15,7 +16,6 @@ class ItineraryController extends BaseController
      */
     public function index()
     {
-        //dd($this->isAdmin);
         if ($this->isAdmin == true) {
             // load the itinerary to be updated
             $itineraries = Itinerary::all();
@@ -53,6 +53,11 @@ class ItineraryController extends BaseController
 
         $this->log('Itinerary Created');
 
+        activity()
+            ->causedBy($this->user)
+            ->performedOn($itinerary)
+            ->log('itinerary created');
+
         return $this->setResponse(201, $itinerary)->respond();
     }
 
@@ -66,7 +71,9 @@ class ItineraryController extends BaseController
     {
         $itinerary = $this->findItinerary($id);
 
+
         if($itinerary) {
+
             $this->setResponse(200, $itinerary);
         }
 
@@ -98,25 +105,34 @@ class ItineraryController extends BaseController
                 // check if the itinerary was not changed
                 if (!$itinerary->wasChanged()) {
                     // when the itinerary was not changed...
-                    // ...set the message
-                    $message = 'Itinerary Update Received, But No Changes Made';
-                    // ...log the message
-                    $this->log($message);
+                    // when the itinerary was changed..
+
+                    $message = 'itinerary updated, no changes required';
+                    activity()
+                        ->causedBy($this->user)
+                        ->performedOn($itinerary)
+                        ->log($message);
                     // ...and return a success http status code and message
+
                     $this->setResponse(200, null, $message);
                 }
                 // when the itinerary was changed..
-                // ...set the message
-                $message = 'Itinerary Updated';
-                // ...log the message
-                $this->log($message);
+                $message = 'itinerary updated';
+                activity()
+                    ->causedBy($this->user)
+                    ->performedOn($itinerary)
+                    ->log('itinerary updated');
                 // ...and return a success http status code and message
                 $this->setResponse(202, null, $message);
             }
         } catch (\Exception $e) {
             // when there was a problem updating the itinerary return
             // a response with a bad request message and http code
+
+            dd($e);
             $this->setResponse(400);
+
+            $this->log('There was a problem updating an itinerary','error');
         }
 
         return $this->respond();
@@ -133,15 +149,40 @@ class ItineraryController extends BaseController
         $itinerary = $this->findItinerary($id);
 
         try {
-            $itinerary->delete();
+            if(!is_null($itinerary)) {
+
+                activity()
+                    ->causedBy($this->user)
+                    ->performedOn($itinerary)
+                    ->log('itinerary deleted');
+
+                $itinerary->delete();
+
+                return $this->setResponse(204)->respond();
+            }
         } catch (\Exception $e) {
 
-            $this->log('There was a problem deleting an itinerary');
+            $this->log('There was a problem deleting an itinerary','error');
             return $this->setResponse(400)->respond();
         }
+    }
 
-        $this->log('Itinerary Deleted');
-        return $this->setResponse(204)->respond();
+    /**
+     * Display a listing of the resource logs.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logs($id)
+    {
+        $itinerary = $this->findItinerary($id);
+
+
+        if($itinerary) {
+
+            $this->setResponse(200, $itinerary->activities);
+        }
+
+        return $this->respond();
     }
 
     /**
@@ -165,7 +206,6 @@ class ItineraryController extends BaseController
                     ->where('user_id', $this->user->id)
                     ->firstOrFail();
             }
-
 
             return $itinerary;
 
