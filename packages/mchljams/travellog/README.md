@@ -61,3 +61,21 @@ If you want to seed the database for testing:
 ```
 php artisan db:seed --class=Mchljams\\TravelLog\\Database\\Seeds\\TravelLogDatabaseSeeder
 ```
+
+## Dependencies 
+
+**darkaonline/l5-swagger package**
+
+This package is dependent on the [darkaonline/l5-swagger package](https://github.com/DarkaOnLine/L5-Swagger). Assets from that 
+package, as well as a configuration file must be published in order for the swagger 
+documentation feature to work. 
+
+**spatie/laravel-activitylog** 
+
+The activity log uses the [spatie/laravel-activitylog package](https://github.com/spatie/laravel-activitylog). No additional steps 
+required to make this functional.
+
+## API Documentation 
+
+The api documentation is auto generated based on the Open API Specification (Swagger). 
+You can view the UI documentation by navigating to /api/documentation
