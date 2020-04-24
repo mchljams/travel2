@@ -1,5 +1,30 @@
 <?php
 
+/**
+ * @OA\Info(
+ *      version="1.0.0",
+ *      title="Travel Log Documentation",
+ *      description="Travel Logs OpenAPI Specification",
+ *      @OA\Contact(
+ *          email="michael.james@mchljams.com"
+ *      ),
+ *     @OA\License(
+ *         name="Apache 2.0",
+ *         url="http://www.apache.org/licenses/LICENSE-2.0.html"
+ *     )
+ * ),
+ * @OA\SecurityScheme(
+ *      securityScheme="bearerAuth",
+ *      in="header",
+ *      name="Authorization",
+ *      type="http",
+ *      scheme="bearer",
+ *      bearerFormat="string",
+ * ),
+ *
+ * @OA\Server(url="http://127.0.0.1:8000/api/v1"),
+ */
+
 namespace Mchljams\TravelLog\Http\Controllers\API;
 
 use Illuminate\Http\Response;
@@ -54,7 +79,7 @@ class BaseController extends Controller
     }
 
 
-    protected function log($action, $level = 'info') {
+    protected function log($action, $message, $level = 'info') {
         Log::{$level}('', array(
             'action' => $action,
             'user' => $this->user->id

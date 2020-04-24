@@ -10,33 +10,135 @@ use Spatie\Activitylog\Models\Activity;
 class ItineraryController extends BaseController
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of itineraries.
      *
      * @return \Illuminate\Http\JsonResponse
+     *
+     * @OA\Get(
+     *     path="/admin/itineraries",
+     *     operationId="index",
+     *     tags={"Admin / Itineraries"},
+     *     description="Get All Itineraries",
+     *     @OA\Response(response="200", description="Success"),
+     *     @OA\Response(response="400", description="Bad Request"),
+     *     @OA\Response(response="401", description="Not Authorized"),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     *
+     * @OA\Get(
+     *     path="/itineraries",
+     *     operationId="index",
+     *     tags={"Itineraries"},
+     *     description="Get All Itineraries",
+     *     @OA\Response(response="200", description="Success"),
+     *     @OA\Response(response="400", description="Bad Request"),
+     *     @OA\Response(response="401", description="Not Authorized"),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     *
      */
     public function index()
     {
-        if ($this->isAdmin == true) {
-            // load the itinerary to be updated
-            $itineraries = Itinerary::all();
+        try {
+            if ($this->isAdmin == true) {
+                // load the itinerary to be updated
+                $itineraries = Itinerary::all();
 
 
-        } else {
-            // load the itinerary to be updated
-            $itineraries = Itinerary::where('user_id', $this->user->id)
-                ->where('user_id', $this->user->id)
-                ->get();
+            } else {
+                // load the itinerary to be updated
+                $itineraries = Itinerary::where('user_id', $this->user->id)
+                    ->where('user_id', $this->user->id)
+                    ->get();
+            }
+
+            $this->setResponse(200, $itineraries);
+
+        } catch (\Exception $e) {
+
+
+            $this->setResponse(400);
+
+            $this->log('There was a problem loading the itineraries', $e->getMessage(),'error');
+
         }
 
-
-        return $this->setResponse(200, $itineraries)->respond();
+        return $this->respond();
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created itinerary.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Mchljams\TravelLog\Http\Requests\StoreItineraryRequest  $request
      * @return \Illuminate\Http\JsonResponse
+     *
+     *
+     * @OA\Post(
+     *     path="/admin/itineraries",
+     *     operationId="store",
+     *     tags={"Admin / Itineraries"},
+     *     description="Create Itinerary",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     property="name",
+     *                     description="Updated name of the itinerary",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="user_id",
+     *                     description="Updated user_id of the itinerary",
+     *                     type="integer"
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response="201", description="Created"),
+     *     @OA\Response(response="400", description="Bad Request"),
+     *     @OA\Response(response="401", description="Not Authorized"),
+     *     @OA\Response(response="422", description="Unprocessable Entity"),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     *
+     * @OA\Post(
+     *     path="/itineraries",
+     *     operationId="store",
+     *     tags={"Itineraries"},
+     *     description="Create Itinerary",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     property="name",
+     *                     description="Updated name of the itinerary",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="user_id",
+     *                     description="Updated user_id of the itinerary",
+     *                     type="integer"
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response="201", description="Created"),
+     *     @OA\Response(response="400", description="Bad Request"),
+     *     @OA\Response(response="401", description="Not Authorized"),
+     *     @OA\Response(response="422", description="Unprocessable Entity"),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     *
      */
     public function store(StoreItineraryRequest $request)
     {
@@ -51,7 +153,7 @@ class ItineraryController extends BaseController
             $itinerary->save();
         }
 
-        $this->log('Itinerary Created');
+        $this->log('Itinerary Created', '');
 
         activity()
             ->causedBy($this->user)
@@ -62,10 +164,53 @@ class ItineraryController extends BaseController
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified itinerary.
      *
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
+     *
+     * @OA\Get(
+     *     path="/admin/itineraries/{itineraryId}",
+     *     operationId="show",
+     *     tags={"Admin / Itineraries"},
+     *     description="Get an Itinerary",
+     *     @OA\Parameter(
+     *         name="itineraryId",
+     *         description="Itinerary id",
+     *         required=true,
+     *         in="path",
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(response="200", description="Success"),
+     *     @OA\Response(response="401", description="Not Authorized"),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     *
+     * @OA\Get(
+     *     path="/itineraries/{itineraryId}",
+     *     operationId="show",
+     *     tags={"Itineraries"},
+     *     description="Get an Itinerary",
+     *     @OA\Parameter(
+     *         name="itineraryId",
+     *         description="Itinerary id",
+     *         required=true,
+     *         in="path",
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(response="200", description="Success"),
+     *     @OA\Response(response="401", description="Not Authorized"),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     *
      */
     public function show($id)
     {
@@ -81,11 +226,93 @@ class ItineraryController extends BaseController
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified itinerary.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Mchljams\TravelLog\Http\Requests\StoreItineraryRequest $request
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
+     *
+     *
+     * @OA\Put(
+     *     path="/admin/itineraries/{itineraryId}",
+     *     operationId="update",
+     *     tags={"Admin / Itineraries"},
+     *     description="Update Itinerary",
+     *     @OA\Parameter(
+     *         name="itineraryId",
+     *         required=true,
+     *         in="path",
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 @OA\Property(
+     *                     property="name",
+     *                     description="Updated name of the itinerary",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="user_id",
+     *                     description="Updated user_id of the itinerary",
+     *                     type="integer"
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response="200", description="Success"),
+     *     @OA\Response(response="400", description="Bad Request"),
+     *     @OA\Response(response="401", description="Not Authorized"),
+     *     @OA\Response(response="422", description="Unprocessable Entity"),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     *
+     * @OA\Put(
+     *     path="/itineraries/{itineraryId}",
+     *     operationId="update",
+     *     tags={"Itineraries"},
+     *     description="Update Itinerary",
+     *     @OA\Parameter(
+     *         name="itineraryId",
+     *         required=true,
+     *         in="path",
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 @OA\Property(
+     *                     property="name",
+     *                     description="Updated name of the itinerary",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="user_id",
+     *                     description="Updated user_id of the itinerary",
+     *                     type="integer"
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response="200", description="Success"),
+     *     @OA\Response(response="400", description="Bad Request"),
+     *     @OA\Response(response="401", description="Not Authorized"),
+     *     @OA\Response(response="422", description="Unprocessable Entity"),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     *
      */
     public function update(StoreItineraryRequest $request, $id)
     {
@@ -128,21 +355,65 @@ class ItineraryController extends BaseController
         } catch (\Exception $e) {
             // when there was a problem updating the itinerary return
             // a response with a bad request message and http code
-
-            dd($e);
             $this->setResponse(400);
 
-            $this->log('There was a problem updating an itinerary','error');
+            $this->log('There was a problem updating an itinerary', '','error');
         }
 
         return $this->respond();
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified itinerary.
      *
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
+     *
+     *
+     * @OA\Delete(
+     *     path="/admin/itineraries/{itineraryId}",
+     *     operationId="destroy",
+     *     tags={"Admin / Itineraries"},
+     *     description="Get an Itinerary",
+     *     @OA\Parameter(
+     *         name="itineraryId",
+     *         description="Itinerary id",
+     *         required=true,
+     *         in="path",
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(response="200", description="Success"),
+     *     @OA\Response(response="204", description="No Content"),
+     *     @OA\Response(response="401", description="Not Authorized"),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     *
+     * @OA\Delete(
+     *     path="/itineraries/{itineraryId}",
+     *     operationId="destroy",
+     *     tags={"Itineraries"},
+     *     description="Get an Itinerary",
+     *     @OA\Parameter(
+     *         name="itineraryId",
+     *         description="Itinerary id",
+     *         required=true,
+     *         in="path",
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(response="200", description="Success"),
+     *     @OA\Response(response="204", description="No Content"),
+     *     @OA\Response(response="401", description="Not Authorized"),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
+     *
      */
     public function destroy($id)
     {
@@ -162,15 +433,36 @@ class ItineraryController extends BaseController
             }
         } catch (\Exception $e) {
 
-            $this->log('There was a problem deleting an itinerary','error');
+            $this->log('There was a problem deleting an itinerary', $e->getMessage() ,'error');
             return $this->setResponse(400)->respond();
         }
     }
 
     /**
-     * Display a listing of the resource logs.
+     * Display a listing of the itinerary logs.
      *
      * @return \Illuminate\Http\JsonResponse
+     *
+     * @OA\Get(
+     *     path="/admin/itineraries/log/{itineraryId}",
+     *     operationId="logs",
+     *     tags={"Admin / Itineraries"},
+     *     description="Get an Itineraries Log",
+     *     @OA\Parameter(
+     *         name="itineraryId",
+     *         description="Itinerary id",
+     *         required=true,
+     *         in="path",
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\Response(response="200", description="Success"),
+     *     @OA\Response(response="401", description="Not Authorized"),
+     *     security={
+     *         {"bearerAuth": {}}
+     *     }
+     * )
      */
     public function logs($id)
     {
@@ -214,7 +506,7 @@ class ItineraryController extends BaseController
             // if the itinerary was not found, then return a not found response
             $this->setResponse(404, null, 'Itinerary Not Found');
 
-            $this->log('There was a problem loading an itinerary');
+            $this->log('There was a problem loading an itinerary', $e->getMessage(), 'error');
 
             return null;
         }

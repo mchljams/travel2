@@ -5,6 +5,7 @@ namespace Mchljams\TravelLog\Exceptions;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Database\QueryException;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 class ApiHandler extends ExceptionHandler
 {
@@ -57,6 +58,12 @@ class ApiHandler extends ExceptionHandler
             return response()->json([
                 'message' => 'Bad Request'
             ], 400);
+        }
+
+        if ($exception instanceof RouteNotFoundException && $request->wantsJson()) {
+            return response()->json([
+                'message' => 'Not Authorized'
+            ], 401);
         }
 
 

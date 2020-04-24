@@ -26,7 +26,6 @@ class StoreItineraryRequest extends FormRequest
     public function rules()
     {
         $input = $this->input();
-
         // check if admin
         $admin = ($this->user()->getApiGuard() == 'admin') ? true : false;
         $name = $input['name'];
