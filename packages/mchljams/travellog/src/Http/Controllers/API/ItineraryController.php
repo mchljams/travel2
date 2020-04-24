@@ -121,11 +121,6 @@ class ItineraryController extends BaseController
      *                     property="name",
      *                     description="Updated name of the itinerary",
      *                     type="string"
-     *                 ),
-     *                 @OA\Property(
-     *                     property="user_id",
-     *                     description="Updated user_id of the itinerary",
-     *                     type="integer"
      *                 )
      *             )
      *         )
@@ -295,11 +290,6 @@ class ItineraryController extends BaseController
      *                     property="name",
      *                     description="Updated name of the itinerary",
      *                     type="string"
-     *                 ),
-     *                 @OA\Property(
-     *                     property="user_id",
-     *                     description="Updated user_id of the itinerary",
-     *                     type="integer"
      *                 )
      *             )
      *         )
