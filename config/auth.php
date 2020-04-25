@@ -46,6 +46,17 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'admin_web' => [
+            'driver' => 'session',
+            'provider' => 'admin_users',
+        ],
+
+        'admin_api' => [
+            'driver' => 'token',
+            'provider' => 'admin_users',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -68,7 +79,12 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => Mchljams\TravelLog\Models\User::class,
+        ],
+
+        'admin_users' => [
+            'driver' => 'eloquent',
+            'model' => Mchljams\TravelLog\Models\AdminUser::class,
         ],
 
         // 'users' => [
@@ -99,8 +115,12 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'admin_users' => [
+            'provider' => 'admin_users',
+            'table' => 'password_resets',
+            'expire' => 15,
+        ],
     ],
-
     /*
     |--------------------------------------------------------------------------
     | Password Confirmation Timeout
