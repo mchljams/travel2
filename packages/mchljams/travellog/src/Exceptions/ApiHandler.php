@@ -2,7 +2,7 @@
 
 namespace Mchljams\TravelLog\Exceptions;
 
-use Exception;
+use Throwable;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Database\QueryException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
@@ -33,7 +33,7 @@ class ApiHandler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return void
      */
-    public function report(Exception $exception)
+    public function report(Throwable $exception)
     {
         parent::report($exception);
     }
@@ -45,7 +45,7 @@ class ApiHandler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, Throwable $exception)
     {
 
         if ($exception instanceof NotFoundHttpException && $request->wantsJson()) {

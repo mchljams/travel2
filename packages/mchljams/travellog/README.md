@@ -70,6 +70,12 @@ This package is dependent on the [darkaonline/l5-swagger package](https://github
 package, as well as a configuration file must be published in order for the swagger 
 documentation feature to work. 
 
+``` 
+php artisan vendor:publish
+
+```
+(Choose the l5-swagger service provider.)
+
 **spatie/laravel-activitylog** 
 
 The activity log uses the [spatie/laravel-activitylog package](https://github.com/spatie/laravel-activitylog). No additional steps 
