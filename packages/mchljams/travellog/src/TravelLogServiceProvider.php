@@ -29,8 +29,20 @@ class TravelLogServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Publish a config file
+        $configPath = __DIR__.'/../config/l5-swagger.php';
+        $this->publishes([
+            __DIR__.'/../config/l5-swagger.php' => config_path('l5-swagger.php'),
+            __DIR__.'/../config/auth.php' => config_path('auth.php')
+        ], 'travellog');
+
+        //Publish views from l5-swagger
+        $this->publishes([
+            base_path() . '/vendor/darkaonline/l5-swagger/resources/views' => config('l5-swagger.paths.views'),
+        ], 'travellog');
+
         // Load the package API Routes
-        $this->loadRoutesFrom(__DIR__.'/Routes/api.php');
+        $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
         // Load the package migrations
         $this->loadMigrationsFrom(__DIR__.'/Database/Migrations');
         // Load the package factories

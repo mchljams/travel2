@@ -46,18 +46,48 @@
     ],
     ```
     
+3. Publish the Assets:
+    ``` 
+    php artisan vendor:publish --tag=travellog --force
+    ```
+    
+4. Run the migratons:
+
+    ```
+    php artisan migrate
+    ```
+    
+5. Seed the database: 
+
+    ```
+    php artisan db:seed --class=Mchljams\\TravelLog\\Database\\Seeds\\TravelLogDatabaseSeeder
+    ```
+    
+    
+## Publishing Assets 
+
+The package provides view and confugration assets. Including those form dependent packages. 
+
+To publish use the following command: 
+
+``` 
+php artisan vendor:publish --tag=travellog --force
+```
+    
 ## Database 
 
 
 ### Migration
 
 The migrations can be run with the standard artisan command:
+
 ``` 
 php artisan migrate
 ``` 
 
 ### Seeding 
 If you want to seed the database for testing:
+
 ```
 php artisan db:seed --class=Mchljams\\TravelLog\\Database\\Seeds\\TravelLogDatabaseSeeder
 ```
@@ -70,11 +100,6 @@ This package is dependent on the [darkaonline/l5-swagger package](https://github
 package, as well as a configuration file must be published in order for the swagger 
 documentation feature to work. 
 
-``` 
-php artisan vendor:publish
-
-```
-(Choose the l5-swagger service provider.)
 
 **spatie/laravel-activitylog** 
 
