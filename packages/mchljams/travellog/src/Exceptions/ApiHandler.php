@@ -6,6 +6,7 @@ use Throwable;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Database\QueryException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
+use Illuminate\Auth\AuthenticationException;
 
 class ApiHandler extends ExceptionHandler
 {
@@ -47,7 +48,6 @@ class ApiHandler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-
         if ($exception instanceof NotFoundHttpException && $request->wantsJson()) {
             return response()->json([
                 'data' => 'Resource not found'
@@ -60,7 +60,7 @@ class ApiHandler extends ExceptionHandler
             ], 400);
         }
 
-        if ($exception instanceof RouteNotFoundException && $request->wantsJson()) {
+        if ($exception instanceof RouteNotFoundException) {
             return response()->json([
                 'message' => 'Not Authorized'
             ], 401);
