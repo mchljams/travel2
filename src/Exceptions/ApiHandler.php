@@ -60,6 +60,8 @@ class ApiHandler extends ExceptionHandler
             ], 400);
         }
 
+        // return not authorized when application
+        // tries to redirect to  the login route
         if ($exception instanceof RouteNotFoundException) {
             return response()->json([
                 'message' => 'Not Authorized'
