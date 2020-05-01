@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * @OA\Info(
  *      version="1.0.0",
@@ -22,7 +23,7 @@
  *      bearerFormat="string",
  * ),
  *
- * @OA\Server(url="http://127.0.0.1:8000/api/v1"),
+ * @OA\Server(url=L5_SWAGGER_CONST_HOST),
  */
 
 namespace Mchljams\TravelLog\Http\Controllers\API;
