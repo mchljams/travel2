@@ -10,6 +10,7 @@
   "require": {
     "php": "^7.2.5",
     "laravel/framework": "^7.0",
+    "laravel/passport": "^8.4",git
     "darkaonline/l5-swagger": "^7.0",
     "spatie/laravel-activitylog": "^3.14"
   },

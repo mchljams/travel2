@@ -21,7 +21,7 @@ class ItineraryController extends BaseController
      *     description="Get All Itineraries",
      *     @OA\Response(response="200", description="Success"),
      *     @OA\Response(response="400", description="Bad Request"),
-     *     @OA\Response(response="401", description="Not Authorized"),
+     *     @OA\Response(response="401", description="Not Authorized", {}),
      *     security={
      *         {"bearerAuth": {}}
      *     }
