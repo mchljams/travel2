@@ -23,7 +23,7 @@ class TravelLogDatabaseSeeder extends Seeder
         $this->setFKCheckOff();
 
         $this->call([
-            ActivityLogTableSeeder::class
+            ActivityLogTableSeeder::class,
             AdminUsersTableSeeder::class,
             UsersTableSeeder::class,
             ItinerariesTableSeeder::class
