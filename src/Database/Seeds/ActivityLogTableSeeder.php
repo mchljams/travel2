@@ -5,7 +5,7 @@ namespace Mchljams\TravelLog\Database\Seeds;
 use Illuminate\Database\Seeder;
 use Spatie\Activitylog\Models\Activity;
 
-class ActivityLogSeeder extends Seeder
+class ActivityLogTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

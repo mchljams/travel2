@@ -5,6 +5,7 @@ namespace Mchljams\TravelLog\Database\Seeds;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Mchljams\TravelLog\Database\Seeds\ActivityLogTableSeeder;
 use Mchljams\TravelLog\Database\Seeds\AdminUsersTableSeeder;
 use Mchljams\TravelLog\Database\Seeds\UsersTableSeeder;
 use Mchljams\TravelLog\Database\Seeds\ItinerariesTableSeeder;
@@ -22,6 +23,7 @@ class TravelLogDatabaseSeeder extends Seeder
         $this->setFKCheckOff();
 
         $this->call([
+            ActivityLogTableSeeder::class
             AdminUsersTableSeeder::class,
             UsersTableSeeder::class,
             ItinerariesTableSeeder::class
