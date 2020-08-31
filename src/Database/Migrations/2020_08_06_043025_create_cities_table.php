@@ -32,7 +32,7 @@ class CreateCitiesTable extends Migration
             $table->boolean('incorporated')->nullable();
             $table->string('timezone')->nullable();
             $table->tinyInteger('ranking')->nullable();
-            $table->string('zips', 255)->nullable();
+            $table->text('zips')->nullable();
             $table->bigInteger('simple_maps_id')->nullable();
             $table->timestamps();
         });
