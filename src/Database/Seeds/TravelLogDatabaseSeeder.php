@@ -9,6 +9,7 @@ use Mchljams\TravelLog\Database\Seeds\ActivityLogTableSeeder;
 use Mchljams\TravelLog\Database\Seeds\AdminUsersTableSeeder;
 use Mchljams\TravelLog\Database\Seeds\UsersTableSeeder;
 use Mchljams\TravelLog\Database\Seeds\ItinerariesTableSeeder;
+use Mchljams\TravelLog\Database\Seeds\CitiesTableSeeder;
 
 class TravelLogDatabaseSeeder extends Seeder
 {
@@ -26,7 +27,8 @@ class TravelLogDatabaseSeeder extends Seeder
             ActivityLogTableSeeder::class,
             AdminUsersTableSeeder::class,
             UsersTableSeeder::class,
-            ItinerariesTableSeeder::class
+            ItinerariesTableSeeder::class,
+            CitiesTableSeeder::class
         ]);
 
         $this->setFKCheckOn();

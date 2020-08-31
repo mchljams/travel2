@@ -14,6 +14,27 @@
  *         url="http://www.apache.org/licenses/LICENSE-2.0.html"
  *     )
  * ),
+ *
+ * @OA\Tag(
+ *     name="Admin / Itineraries",
+ *     description="Admin API Endpoints of Itineraries"
+ * )
+ *
+ * @OA\Tag(
+ *     name="Admin / Places",
+ *     description="Admin API Endpoints of Places"
+ * )
+ *
+ * @OA\Tag(
+ *     name="Itineraries",
+ *     description="API Endpoints of Itineraries"
+ * )
+ *
+ * @OA\Tag(
+ *     name="Places",
+ *     description="API Endpoints of Places"
+ * )
+ *
  * @OA\SecurityScheme(
  *      securityScheme="bearerAuth",
  *      in="header",

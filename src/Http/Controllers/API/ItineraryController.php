@@ -468,7 +468,7 @@ class ItineraryController extends BaseController
     }
 
     /**
-     * Remove the specified resource from storage.
+     * find an itinerary by id.
      *
      * @param  int  $id
      * @return \App\Itinerary

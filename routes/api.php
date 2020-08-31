@@ -22,7 +22,12 @@ Route::prefix('api/v1')->group(function () {
                 ////////////////////////////////////////////////////////////
                 Route::get('itineraries/log/{id}', 'Mchljams\TravelLog\Http\Controllers\API\ItineraryController@logs');
                 Route::apiResource('itineraries', 'Mchljams\TravelLog\Http\Controllers\API\ItineraryController');
-
+                Route::apiResource('places/states', 'Mchljams\TravelLog\Http\Controllers\API\StateController')->only([
+                    'index'
+                ]);
+                Route::apiResource('places/cities', 'Mchljams\TravelLog\Http\Controllers\API\CityController')->only([
+                    'index', 'show'
+                ]);;
                 ////////////////////////////////////////////////////////////
             });
         });
@@ -37,6 +42,12 @@ Route::prefix('api/v1')->group(function () {
                 return $request->user();
             })->name('user.show');
             Route::apiResource('itineraries', 'Mchljams\TravelLog\Http\Controllers\API\ItineraryController');
+            Route::apiResource('places/states', 'Mchljams\TravelLog\Http\Controllers\API\StateController')->only([
+                'index'
+            ]);
+            Route::apiResource('places/cities', 'Mchljams\TravelLog\Http\Controllers\API\CityController')->only([
+                'index', 'show'
+            ]);
             ////////////////////////////////////////////////////////////
         });
     });

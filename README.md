@@ -100,11 +100,14 @@ This package is dependent on the [darkaonline/l5-swagger package](https://github
 package, as well as a configuration file must be published in order for the swagger 
 documentation feature to work. 
 
-
 **spatie/laravel-activitylog** 
 
 The activity log uses the [spatie/laravel-activitylog package](https://github.com/spatie/laravel-activitylog). No additional steps 
 required to make this functional.
+
+**maatwebsite/excel**
+
+City/State data is imported using [maatwebsite/excel](https://github.com/maatwebsite/Laravel-Excel). The data comes from [simplemaps](https://simplemaps.com/data/us-cities).
 
 ## API Documentation 
 
