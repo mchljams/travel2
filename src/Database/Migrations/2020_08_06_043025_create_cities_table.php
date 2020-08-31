@@ -21,7 +21,7 @@ class CreateCitiesTable extends Migration
             $table->string('state_name')->nullable();
             $table->integer('county_fips')->nullable();
             $table->string('county_name')->nullable();
-            $table->integer('county_fips_all')->nullable();
+            $table->string('county_fips_all')->nullable();
             $table->string('county_name_all')->nullable();
             $table->decimal('lat', 10, 8)->nullable();
             $table->decimal('lng', 11, 8)->nullable();
@@ -36,30 +36,6 @@ class CreateCitiesTable extends Migration
             $table->bigInteger('simple_maps_id')->nullable();
             $table->timestamps();
         });
-
-//        Schema::create('cities', function (Blueprint $table) {
-//            $table->id();
-//            $table->string('city')->nullable();
-//            $table->string('city_ascii')->nullable();
-//            $table->string('state_id')->nullable();
-//            $table->string('state_name')->nullable();
-//            $table->string('county_fips')->nullable();
-//            $table->string('county_name')->nullable();
-//            $table->string('county_fips_all')->nullable();
-//            $table->string('county_name_all')->nullable();
-//            $table->decimal('lat', 10, 8)->nullable();
-//            $table->decimal('lng', 11, 8)->nullable();
-//            $table->string('population')->nullable();
-//            $table->string('density')->nullable();
-//            $table->string('source')->nullable();
-//            $table->string('military')->nullable();
-//            $table->string('incorporated')->nullable();
-//            $table->string('timezone')->nullable();
-//            $table->string('ranking')->nullable();
-//            $table->string('zips')->nullable();
-//            $table->string('simple_maps_id')->nullable();
-//            $table->timestamps();
-//        });
     }
 
     /**
