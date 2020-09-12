@@ -21,6 +21,11 @@
  * )
  *
  * @OA\Tag(
+ *     name="Admin / Waypoints",
+ *     description="Admin API Endpoints of Waypoints"
+ * )
+ *
+ * @OA\Tag(
  *     name="Admin / Places",
  *     description="Admin API Endpoints of Places"
  * )
@@ -28,6 +33,11 @@
  * @OA\Tag(
  *     name="Itineraries",
  *     description="API Endpoints of Itineraries"
+ * )
+ *
+ * @OA\Tag(
+ *     name="Waypoints",
+ *     description="API Endpoints of Waypoints"
  * )
  *
  * @OA\Tag(
