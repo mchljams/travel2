@@ -3,12 +3,10 @@
 namespace Mchljams\TravelLog\Database\Seeds;
 
 use Illuminate\Database\Seeder;
-use Mchljams\TravelLog\Models\City;
-use Mchljams\TravelLog\Imports\CitiesImport;
-use Maatwebsite\Excel\Facades\Excel;
+use Mchljams\TravelLog\Models\Waypoint;
+use Illuminate\Support\Facades\DB;
 
-
-class CitiesTableSeeder extends Seeder
+class WaypointsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,7 +16,8 @@ class CitiesTableSeeder extends Seeder
     public function run()
     {
         // Let's truncate our existing records to start from scratch.
-        City::truncate();
-        Excel::import(new CitiesImport, 'uscities.csv');
+        Waypoint::truncate();
+
+        $waypoints = factory(Waypoint::class, 30)->create();
     }
 }

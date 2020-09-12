@@ -27,7 +27,8 @@ Route::prefix('api/v1')->group(function () {
                 ]);
                 Route::apiResource('places/cities', 'Mchljams\TravelLog\Http\Controllers\API\CityController')->only([
                     'index', 'show'
-                ]);;
+                ]);
+                Route::apiResource('waypoints', 'Mchljams\TravelLog\Http\Controllers\API\WaypointController');
                 ////////////////////////////////////////////////////////////
             });
         });
@@ -48,6 +49,7 @@ Route::prefix('api/v1')->group(function () {
             Route::apiResource('places/cities', 'Mchljams\TravelLog\Http\Controllers\API\CityController')->only([
                 'index', 'show'
             ]);
+            Route::apiResource('waypoints', 'Mchljams\TravelLog\Http\Controllers\API\WaypointController');
             ////////////////////////////////////////////////////////////
         });
     });
