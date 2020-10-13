@@ -60,11 +60,11 @@ class CityController extends BaseController
 
             $state_name = $request->query('state_name');
 
-            $cities = City::where('state_id', $state_name)->get();
+            //$cities = City::where('state_id', $state_name)->get();
 
             //$cities = DB::table('cities')->where('state_id', $state_name)->get();
 
-            //$cities = DB::select('select * from cities where state_id = ?', [$state_name]);
+            $cities = DB::select('select * from cities where state_id = ?', [$state_name]);
 
             // I think this is slow because sqlite has to read from the machines disk.
             // need to test on MySQL
