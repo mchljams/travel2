@@ -39,9 +39,6 @@ Route::prefix('api/v1')->group(function () {
             ////////////////////////////////////////////////////////////
             /// PLACE PUBLIC API ROUTES HERE ///////////////////////////
             ////////////////////////////////////////////////////////////
-            Route::get('/user', function (Request $request) {
-                return $request->user();
-            })->name('user.show');
             Route::apiResource('itineraries', 'Mchljams\TravelLog\Http\Controllers\API\ItineraryController');
             Route::apiResource('places/states', 'Mchljams\TravelLog\Http\Controllers\API\StateController')->only([
                 'index'
