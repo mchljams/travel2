@@ -35,6 +35,8 @@ class CreateCitiesTable extends Migration
             $table->text('zips')->nullable();
             $table->bigInteger('simple_maps_id')->nullable();
             $table->timestamps();
+
+            $table->index('state_id');
         });
     }
 

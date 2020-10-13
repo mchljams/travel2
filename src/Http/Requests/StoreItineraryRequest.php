@@ -36,7 +36,7 @@ class StoreItineraryRequest extends FormRequest
         // add the name rules to the array
         $rules['name'] = [
             'required',
-            'regex:/^[a-zA-z0-9 ]+$/',
+            'regex:/^[a-zA-Z0-9 ]+$/', // lower alpha, upper alpha, numbers and spaces
             Rule::unique('itineraries')->where(function ($query) use ($user_id, $name) {
                 return $query->where('user_id', $user_id);
             })->ignore($name, 'name')

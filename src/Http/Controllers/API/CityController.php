@@ -6,6 +6,8 @@ use Mchljams\TravelLog\Models\City;
 use Mchljams\TravelLog\Http\Controllers\API\BaseController;
 use Mchljams\TravelLog\Http\Requests\StoreItineraryRequest;
 use Spatie\Activitylog\Models\Activity;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CityController extends BaseController
 {
@@ -32,6 +34,17 @@ class CityController extends BaseController
      *     operationId="index",
      *     tags={"Places"},
      *     description="Get All Cities",
+     *
+     *     @OA\Parameter(
+     *         name="state_name",
+     *         description="State id",
+     *         required=true,
+     *         in="query",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *
      *     @OA\Response(response="200", description="Success"),
      *     @OA\Response(response="400", description="Bad Request"),
      *     @OA\Response(response="401", description="Not Authorized"),
@@ -41,13 +54,22 @@ class CityController extends BaseController
      * )
      *
      */
-    public function index()
+    public function index(Request $request)
     {
-        try {
+       try {
 
-            $states = City::states();
+            $state_name = $request->query('state_name');
 
-            $this->setResponse(200, $states);
+            $cities = City::where('state_id', $state_name)->get();
+
+            //$cities = DB::table('cities')->where('state_id', $state_name)->get();
+
+            //$cities = DB::select('select * from cities where state_id = ?', [$state_name]);
+
+            // I think this is slow because sqlite has to read from the machines disk.
+            // need to test on MySQL
+
+            $this->setResponse(200, $cities);
 
         } catch (\Exception $e) {
 
