@@ -15,9 +15,9 @@ class StateController extends BaseController
      * @return \Illuminate\Http\JsonResponse
      *
      * @OA\Get(
-     *     path="/admin/places/states",
+     *     path="/admin/geolocation/states",
      *     operationId="index",
-     *     tags={"Admin / Places"},
+     *     tags={"Admin / Geolocation"},
      *     description="Get All States",
      *     @OA\Response(response="200", ref="#/components/responses/200Success"),
      *     @OA\Response(response="400", ref="#/components/responses/400BadRequest"),
@@ -28,9 +28,9 @@ class StateController extends BaseController
      * )
      *
      * @OA\Get(
-     *     path="/places/states",
+     *     path="/geolocation/states",
      *     operationId="index",
-     *     tags={"Places"},
+     *     tags={"Geolocation"},
      *     description="Get All States",
      *     @OA\Response(response="200", ref="#/components/responses/200Success"),
      *     @OA\Response(response="400", ref="#/components/responses/400BadRequest"),

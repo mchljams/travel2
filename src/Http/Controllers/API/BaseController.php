@@ -26,8 +26,8 @@
  * )
  *
  * @OA\Tag(
- *     name="Admin / Places",
- *     description="Admin API Endpoints of Places"
+ *     name="Admin / Geolocation",
+ *     description="Admin API Endpoints for Geolocation"
  * )
  *
  * @OA\Tag(
@@ -41,8 +41,8 @@
  * )
  *
  * @OA\Tag(
- *     name="Places",
- *     description="API Endpoints of Places"
+ *     name="Geolocation",
+ *     description="API Endpoints for Geolocation"
  * )
  *
  * @OA\SecurityScheme(

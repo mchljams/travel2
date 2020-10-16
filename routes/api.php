@@ -22,10 +22,10 @@ Route::prefix('api/v1')->group(function () {
                 ////////////////////////////////////////////////////////////
                 Route::get('itineraries/log/{id}', 'Mchljams\TravelLog\Http\Controllers\API\ItineraryController@logs');
                 Route::apiResource('itineraries', 'Mchljams\TravelLog\Http\Controllers\API\ItineraryController');
-                Route::apiResource('places/states', 'Mchljams\TravelLog\Http\Controllers\API\StateController')->only([
+                Route::apiResource('geolocation/states', 'Mchljams\TravelLog\Http\Controllers\API\StateController')->only([
                     'index'
                 ]);
-                Route::apiResource('places/cities', 'Mchljams\TravelLog\Http\Controllers\API\CityController')->only([
+                Route::apiResource('geolocation/cities', 'Mchljams\TravelLog\Http\Controllers\API\CityController')->only([
                     'index', 'show'
                 ]);
                 Route::apiResource('waypoints', 'Mchljams\TravelLog\Http\Controllers\API\WaypointController');
@@ -40,10 +40,10 @@ Route::prefix('api/v1')->group(function () {
             /// PLACE PUBLIC API ROUTES HERE ///////////////////////////
             ////////////////////////////////////////////////////////////
             Route::apiResource('itineraries', 'Mchljams\TravelLog\Http\Controllers\API\ItineraryController');
-            Route::apiResource('places/states', 'Mchljams\TravelLog\Http\Controllers\API\StateController')->only([
+            Route::apiResource('geolocation/states', 'Mchljams\TravelLog\Http\Controllers\API\StateController')->only([
                 'index'
             ]);
-            Route::apiResource('places/cities', 'Mchljams\TravelLog\Http\Controllers\API\CityController')->only([
+            Route::apiResource('geolocation/cities', 'Mchljams\TravelLog\Http\Controllers\API\CityController')->only([
                 'index', 'show'
             ]);
             Route::apiResource('waypoints', 'Mchljams\TravelLog\Http\Controllers\API\WaypointController');

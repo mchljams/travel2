@@ -17,9 +17,9 @@ class CityController extends BaseController
      * @return \Illuminate\Http\JsonResponse
      *
      * @OA\Get(
-     *     path="/admin/places/cities",
+     *     path="/admin/geolocation/cities",
      *     operationId="index",
-     *     tags={"Admin / Places"},
+     *     tags={"Admin / Geolocation"},
      *     description="Get All Cities",
      *
      *     @OA\Response(response="200", ref="#/components/responses/200Success"),
@@ -32,9 +32,9 @@ class CityController extends BaseController
      * )
      *
      * @OA\Get(
-     *     path="/places/cities",
+     *     path="/geolocation/cities",
      *     operationId="index",
-     *     tags={"Places"},
+     *     tags={"Geolocation"},
      *     description="Get All Cities",
      *
      *     @OA\Header(
@@ -113,9 +113,9 @@ class CityController extends BaseController
      * @return \Illuminate\Http\JsonResponse
      *
      * @OA\Get(
-     *     path="/admin/places/cities/{cityId}",
+     *     path="/admin/geolocation/cities/{cityId}",
      *     operationId="show",
-     *     tags={"Admin / Places"},
+     *     tags={"Admin / Geolocation"},
      *     description="Get a city",
      *
      *     @OA\Parameter(
@@ -139,9 +139,9 @@ class CityController extends BaseController
      * )
      *
      * @OA\Get(
-     *     path="/places/cities/{cityId}",
+     *     path="/geolocation/cities/{cityId}",
      *     operationId="show",
-     *     tags={"Places"},
+     *     tags={"Geolocation"},
      *     description="Get a city",
      *
      *     @OA\Parameter(
