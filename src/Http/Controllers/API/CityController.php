@@ -134,7 +134,7 @@ class CityController extends BaseController
      *     @OA\Response(response="404", ref="#/components/responses/404NotFound"),
      *
      *     security={
-     *         {"bearerAuth": {}}g
+     *         {"bearerAuth": {}}
      *     }
      * )
      *
