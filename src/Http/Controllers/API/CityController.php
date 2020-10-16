@@ -21,9 +21,11 @@ class CityController extends BaseController
      *     operationId="index",
      *     tags={"Admin / Places"},
      *     description="Get All Cities",
-     *     @OA\Response(response="200", description="Success"),
-     *     @OA\Response(response="400", description="Bad Request"),
-     *     @OA\Response(response="401", description="Not Authorized", {}),
+     *
+     *     @OA\Response(response="200", ref="#/components/responses/200Success"),
+     *     @OA\Response(response="400", ref="#/components/responses/400BadRequest"),
+     *     @OA\Response(response="401", ref="#/components/responses/401NotAuthorized"),
+     *
      *     security={
      *         {"bearerAuth": {}}
      *     }
@@ -35,6 +37,15 @@ class CityController extends BaseController
      *     tags={"Places"},
      *     description="Get All Cities",
      *
+     *     @OA\Header(
+     *         header="api_key",
+     *         description="Api key header",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *
      *     @OA\Parameter(
      *         name="state_name",
      *         description="State id",
@@ -45,9 +56,20 @@ class CityController extends BaseController
      *         )
      *     ),
      *
-     *     @OA\Response(response="200", description="Success"),
-     *     @OA\Response(response="400", description="Bad Request"),
-     *     @OA\Response(response="401", description="Not Authorized"),
+     *     @OA\Parameter(
+     *         name="search",
+     *         description="Search",
+     *         required=true,
+     *         in="query",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *
+     *     @OA\Response(response="200", ref="#/components/responses/200Success"),
+     *     @OA\Response(response="400", ref="#/components/responses/400BadRequest"),
+     *     @OA\Response(response="401", ref="#/components/responses/401NotAuthorized"),
+     *
      *     security={
      *         {"bearerAuth": {}}
      *     }
@@ -105,11 +127,14 @@ class CityController extends BaseController
      *             type="integer"
      *         )
      *     ),
-     *     @OA\Response(response="200", description="Success"),
-     *     @OA\Response(response="401", description="Not Authorized"),
-     *     @OA\Response(response="404", description="Not Found"),
+     *
+     *     @OA\Response(response="200", ref="#/components/responses/200Success"),
+     *     @OA\Response(response="400", ref="#/components/responses/400BadRequest"),
+     *     @OA\Response(response="401", ref="#/components/responses/401NotAuthorized"),
+     *     @OA\Response(response="404", ref="#/components/responses/404NotFound"),
+     *
      *     security={
-     *         {"bearerAuth": {}}
+     *         {"bearerAuth": {}}g
      *     }
      * )
      *
@@ -128,9 +153,12 @@ class CityController extends BaseController
      *             type="integer"
      *         )
      *     ),
-     *     @OA\Response(response="200", description="Success"),
-     *     @OA\Response(response="401", description="Not Authorized"),
-     *     @OA\Response(response="404", description="Not Found"),
+     *
+     *     @OA\Response(response="200", ref="#/components/responses/200Success"),
+     *     @OA\Response(response="400", ref="#/components/responses/400BadRequest"),
+     *     @OA\Response(response="401", ref="#/components/responses/401NotAuthorized"),
+     *     @OA\Response(response="404", ref="#/components/responses/404NotFound"),
+     *
      *     security={
      *         {"bearerAuth": {}}
      *     }

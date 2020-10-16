@@ -19,9 +19,9 @@ class ItineraryController extends BaseController
      *     operationId="index",
      *     tags={"Admin / Itineraries"},
      *     description="Get All Itineraries",
-     *     @OA\Response(response="200", description="Success"),
-     *     @OA\Response(response="400", description="Bad Request"),
-     *     @OA\Response(response="401", description="Not Authorized", {}),
+     *     @OA\Response(response="200", ref="#/components/responses/200Success"),
+     *     @OA\Response(response="400", ref="#/components/responses/400BadRequest"),
+     *     @OA\Response(response="401", ref="#/components/responses/401NotAuthorized"),
      *     security={
      *         {"bearerAuth": {}}
      *     }
@@ -32,9 +32,9 @@ class ItineraryController extends BaseController
      *     operationId="index",
      *     tags={"Itineraries"},
      *     description="Get All Itineraries",
-     *     @OA\Response(response="200", description="Success"),
-     *     @OA\Response(response="400", description="Bad Request"),
-     *     @OA\Response(response="401", description="Not Authorized"),
+     *     @OA\Response(response="200", ref="#/components/responses/200Success"),
+     *     @OA\Response(response="400", ref="#/components/responses/400BadRequest"),
+     *     @OA\Response(response="401", ref="#/components/responses/401NotAuthorized"),
      *     security={
      *         {"bearerAuth": {}}
      *     }
@@ -99,10 +99,10 @@ class ItineraryController extends BaseController
      *             )
      *         )
      *     ),
-     *     @OA\Response(response="201", description="Created"),
-     *     @OA\Response(response="400", description="Bad Request"),
-     *     @OA\Response(response="401", description="Not Authorized"),
-     *     @OA\Response(response="422", description="Unprocessable Entity"),
+     *     @OA\Response(response="201", ref="#/components/responses/201Created"),
+     *     @OA\Response(response="400", ref="#/components/responses/400BadRequest"),
+     *     @OA\Response(response="401", ref="#/components/responses/401NotAuthorized"),
+     *     @OA\Response(response="422", ref="#/components/responses/422UnprocessableEntity"),
      *     security={
      *         {"bearerAuth": {}}
      *     }
@@ -125,10 +125,10 @@ class ItineraryController extends BaseController
      *             )
      *         )
      *     ),
-     *     @OA\Response(response="201", description="Created"),
-     *     @OA\Response(response="400", description="Bad Request"),
-     *     @OA\Response(response="401", description="Not Authorized"),
-     *     @OA\Response(response="422", description="Unprocessable Entity"),
+     *     @OA\Response(response="201", ref="#/components/responses/201Created"),
+     *     @OA\Response(response="400", ref="#/components/responses/400BadRequest"),
+     *     @OA\Response(response="401", ref="#/components/responses/401NotAuthorized"),
+     *     @OA\Response(response="422", ref="#/components/responses/422UnprocessableEntity"),
      *     security={
      *         {"bearerAuth": {}}
      *     }
@@ -178,8 +178,8 @@ class ItineraryController extends BaseController
      *             type="integer"
      *         )
      *     ),
-     *     @OA\Response(response="200", description="Success"),
-     *     @OA\Response(response="401", description="Not Authorized"),
+     *     @OA\Response(response="200", ref="#/components/responses/200Success"),
+     *     @OA\Response(response="401", ref="#/components/responses/401NotAuthorized"),
      *     security={
      *         {"bearerAuth": {}}
      *     }
@@ -199,8 +199,8 @@ class ItineraryController extends BaseController
      *             type="integer"
      *         )
      *     ),
-     *     @OA\Response(response="200", description="Success"),
-     *     @OA\Response(response="401", description="Not Authorized"),
+     *     @OA\Response(response="200", ref="#/components/responses/200Success"),
+     *     @OA\Response(response="401", ref="#/components/responses/401NotAuthorized"),
      *     security={
      *         {"bearerAuth": {}}
      *     }
@@ -259,10 +259,10 @@ class ItineraryController extends BaseController
      *             )
      *         )
      *     ),
-     *     @OA\Response(response="200", description="Success"),
-     *     @OA\Response(response="400", description="Bad Request"),
-     *     @OA\Response(response="401", description="Not Authorized"),
-     *     @OA\Response(response="422", description="Unprocessable Entity"),
+     *     @OA\Response(response="202", ref="#/components/responses/202Accepted"),
+     *     @OA\Response(response="400", ref="#/components/responses/400BadRequest"),
+     *     @OA\Response(response="401", ref="#/components/responses/401NotAuthorized"),
+     *     @OA\Response(response="422", ref="#/components/responses/422UnprocessableEntity"),
      *     security={
      *         {"bearerAuth": {}}
      *     }
@@ -294,10 +294,10 @@ class ItineraryController extends BaseController
      *             )
      *         )
      *     ),
-     *     @OA\Response(response="200", description="Success"),
-     *     @OA\Response(response="400", description="Bad Request"),
-     *     @OA\Response(response="401", description="Not Authorized"),
-     *     @OA\Response(response="422", description="Unprocessable Entity"),
+     *     @OA\Response(response="202", ref="#/components/responses/202Accepted"),
+     *     @OA\Response(response="400", ref="#/components/responses/400BadRequest"),
+     *     @OA\Response(response="401", ref="#/components/responses/401NotAuthorized"),
+     *     @OA\Response(response="422", ref="#/components/responses/422UnprocessableEntity"),
      *     security={
      *         {"bearerAuth": {}}
      *     }
@@ -374,9 +374,9 @@ class ItineraryController extends BaseController
      *             type="integer"
      *         )
      *     ),
-     *     @OA\Response(response="200", description="Success"),
-     *     @OA\Response(response="204", description="No Content"),
-     *     @OA\Response(response="401", description="Not Authorized"),
+     *     @OA\Response(response="200", ref="#/components/responses/200Success"),
+     *     @OA\Response(response="204", ref="#/components/responses/204NoContent"),
+     *     @OA\Response(response="401", ref="#/components/responses/401NotAuthorized"),
      *     security={
      *         {"bearerAuth": {}}
      *     }
@@ -396,9 +396,8 @@ class ItineraryController extends BaseController
      *             type="integer"
      *         )
      *     ),
-     *     @OA\Response(response="200", description="Success"),
-     *     @OA\Response(response="204", description="No Content"),
-     *     @OA\Response(response="401", description="Not Authorized"),
+     *     @OA\Response(response="204", ref="#/components/responses/204NoContent"),
+     *     @OA\Response(response="401", ref="#/components/responses/401NotAuthorized"),
      *     security={
      *         {"bearerAuth": {}}
      *     }
@@ -447,8 +446,8 @@ class ItineraryController extends BaseController
      *             type="integer"
      *         )
      *     ),
-     *     @OA\Response(response="200", description="Success"),
-     *     @OA\Response(response="401", description="Not Authorized"),
+     *     @OA\Response(response="200", ref="#/components/responses/200Success"),
+     *     @OA\Response(response="401", ref="#/components/responses/401NotAuthorized"),
      *     security={
      *         {"bearerAuth": {}}
      *     }

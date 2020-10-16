@@ -54,6 +54,86 @@
  *      bearerFormat="string",
  * ),
  *
+ * @OA\Schema(
+ *   schema="product_id",
+ *   type="integer",
+ *   format="int64",
+ *   description="The unique identifier of a product in our catalog"
+ * ),
+ *
+ * @OA\Response(
+ *     response="200Success",
+ *     description="Success",
+ *     content={
+ *         @OA\MediaType(
+ *             mediaType="application/json"
+ *         )
+ *      }
+ * ),
+ * @OA\Response(
+ *     response="201Created",
+ *     description="Success",
+ *     content={
+ *         @OA\MediaType(
+ *             mediaType="application/json"
+ *         )
+ *      }
+ * ),
+ * @OA\Response(
+ *     response="202Accepted",
+ *     description="Accepted",
+ *     content={
+ *         @OA\MediaType(
+ *             mediaType="application/json"
+ *         )
+ *      }
+ * ),
+ * @OA\Response(
+ *     response="204NoContent",
+ *     description="No Content",
+ *     content={
+ *         @OA\MediaType(
+ *             mediaType="application/json"
+ *         )
+ *      }
+ * ),
+ * @OA\Response(
+ *     response="400BadRequest",
+ *     description="Bad Request",
+ *     content={
+ *         @OA\MediaType(
+ *             mediaType="application/json"
+ *         )
+ *      }
+ * ),
+ * @OA\Response(
+ *     response="401NotAuthorized",
+ *     description="Not Authorized",
+ *     content={
+ *         @OA\MediaType(
+ *             mediaType="application/json"
+ *         )
+ *      }
+ * ),
+ * @OA\Response(
+ *     response="404NotFound",
+ *     description="Not Found",
+ *     content={
+ *         @OA\MediaType(
+ *             mediaType="application/json"
+ *         )
+ *      }
+ * ),
+ * @OA\Response(
+ *     response="422UnprocessableEntity",
+ *     description="Unprocessable Entity",
+ *     content={
+ *         @OA\MediaType(
+ *             mediaType="application/json"
+ *         )
+ *      }
+ * ),
+ *
  * @OA\Server(url=L5_SWAGGER_CONST_HOST),
  */
 
@@ -63,6 +143,7 @@ use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Mchljams\TravelLog\Http\Middleware\ApiHeaders;
 
 class BaseController extends Controller
 {
@@ -74,6 +155,8 @@ class BaseController extends Controller
 
     public function __construct()
     {
+        $this->middleware(ApiHeaders::class);
+
         if(Auth::guard('admin_api')->check()) {
             $this->user = Auth::guard('admin_api')->user();
             $this->isAdmin = true;
@@ -82,7 +165,7 @@ class BaseController extends Controller
             $this->isAdmin = false;
         } else {
             return response()->json([
-                'message' => 'Unauthorized',
+                'message' => 'Not Authorized',
             ], 401);
         }
     }

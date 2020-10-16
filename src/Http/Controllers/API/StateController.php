@@ -19,9 +19,9 @@ class StateController extends BaseController
      *     operationId="index",
      *     tags={"Admin / Places"},
      *     description="Get All States",
-     *     @OA\Response(response="200", description="Success"),
-     *     @OA\Response(response="400", description="Bad Request"),
-     *     @OA\Response(response="401", description="Not Authorized", {}),
+     *     @OA\Response(response="200", ref="#/components/responses/200Success"),
+     *     @OA\Response(response="400", ref="#/components/responses/400BadRequest"),
+     *     @OA\Response(response="401", ref="#/components/responses/401NotAuthorized"),
      *     security={
      *         {"bearerAuth": {}}
      *     }
@@ -32,9 +32,9 @@ class StateController extends BaseController
      *     operationId="index",
      *     tags={"Places"},
      *     description="Get All States",
-     *     @OA\Response(response="200", description="Success"),
-     *     @OA\Response(response="400", description="Bad Request"),
-     *     @OA\Response(response="401", description="Not Authorized"),
+     *     @OA\Response(response="200", ref="#/components/responses/200Success"),
+     *     @OA\Response(response="400", ref="#/components/responses/400BadRequest"),
+     *     @OA\Response(response="401", ref="#/components/responses/401NotAuthorized"),
      *     security={
      *         {"bearerAuth": {}}
      *     }

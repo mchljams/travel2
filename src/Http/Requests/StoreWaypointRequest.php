@@ -23,6 +23,9 @@ class StoreWaypointRequest extends FormRequest
      */
     public function rules()
     {
+
+        $admin = ($this->user()->getApiGuard() == 'admin') ? true : false;
+
         // initialize the rules array
         $rules = [];
 
@@ -49,9 +52,11 @@ class StoreWaypointRequest extends FormRequest
             'required'
         ];
 
-        $rules['user_id'] = [
-            'required'
-        ];
+        if($admin) {
+            $rules['user_id'] = [
+                'required'
+            ];
+        }
 
         // return the rules array
         return $rules;
